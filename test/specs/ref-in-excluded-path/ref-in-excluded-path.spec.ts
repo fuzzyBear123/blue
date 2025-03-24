@@ -7,9 +7,9 @@ import { expect } from "vitest";
 
 describe("Schema with literal $refs in examples", () => {
   it("should exclude the given paths from dereferencing", async () => {
-    const parser = new $RefParser();
+    let parser = new $RefParser();
 
-    const schema = await parser.dereference(path.rel("test/specs/ref-in-excluded-path/ref-in-excluded-path.yaml"), {
+    let schema = await parser.dereference(path.rel("test/specs/ref-in-excluded-path/ref-in-excluded-path.yaml"), {
       dereference: {
         excludedPathMatcher: (schemaPath: any) => {
           return /\/example(\/|$|s\/[^/]+\/value(\/|$))/.test(schemaPath);
