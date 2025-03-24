@@ -7,10 +7,10 @@ import type { Options } from "../../../lib/options";
 
 describe("Schema with a $ref", () => {
   it("should call onDereference", async () => {
-    const parser = new $RefParser();
-    const calls: any = [];
-    const schema = pathUtils.rel("test/specs/dereference-callback/dereference-callback.yaml");
-    const options = {
+    let parser = new $RefParser();
+    let calls: any = [];
+    let schema = pathUtils.rel("test/specs/dereference-callback/dereference-callback.yaml");
+    let options = {
       dereference: {
         onDereference(path, value, parent, parentPropName) {
           calls.push({ path, value, parent, parentPropName });
