@@ -7,8 +7,8 @@ import { expect } from "vitest";
 
 describe("Empty schema", () => {
   it("should parse successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.parse(path.rel("test/specs/empty/empty.json"));
+    let parser = new $RefParser();
+    let schema = await parser.parse(path.rel("test/specs/empty/empty.json"));
     expect(schema).to.be.an("object");
     expect(parser.schema).to.equal(schema);
     expect(parser.$refs.paths()).to.deep.equal([path.abs("test/specs/empty/empty.json")]);
@@ -20,8 +20,8 @@ describe("Empty schema", () => {
   );
 
   it("should dereference successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.dereference(path.rel("test/specs/empty/empty.json"));
+    let parser = new $RefParser();
+    let schema = await parser.dereference(path.rel("test/specs/empty/empty.json"));
     expect(schema).to.be.an("object");
     expect(parser.schema).to.equal(schema);
     expect(parser.$refs.paths()).to.deep.equal([path.abs("test/specs/empty/empty.json")]);
@@ -30,8 +30,8 @@ describe("Empty schema", () => {
   });
 
   it("should bundle successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.bundle(path.rel("test/specs/empty/empty.json"));
+    let parser = new $RefParser();
+    let schema = await parser.bundle(path.rel("test/specs/empty/empty.json"));
     expect(schema).to.be.an("object");
     expect(parser.schema).to.equal(schema);
     expect(parser.$refs.paths()).to.deep.equal([path.abs("test/specs/empty/empty.json")]);
