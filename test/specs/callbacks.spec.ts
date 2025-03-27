@@ -7,8 +7,8 @@ import { ParserError } from "../../lib/util/errors.js";
 import { expect } from "vitest";
 
 describe("Callback & Promise syntax", () => {
-  const methods = ["parse", "resolve", "dereference", "bundle"] as const;
-  for (const method of methods) {
+  let methods = ["parse", "resolve", "dereference", "bundle"] as let;
+  for (let method of methods) {
     describe(method + " method", () => {
       it("should call the callback function upon success", testCallbackSuccess(method));
       it("should call the callback function upon failure", testCallbackError(method));
@@ -20,7 +20,7 @@ describe("Callback & Promise syntax", () => {
   function testCallbackSuccess(method: (typeof methods)[number]) {
     return () =>
       new Promise<void>((resolve, reject) => {
-        const parser = new $RefParser();
+        let parser = new $RefParser();
         parser[method](path.rel("test/specs/internal/internal.yaml"), (err: any, result: any) => {
           try {
             expect(err).to.equal(null);
@@ -57,7 +57,7 @@ describe("Callback & Promise syntax", () => {
 
   function testPromiseSuccess(method: (typeof methods)[number]) {
     return function () {
-      const parser = new $RefParser();
+      let parser = new $RefParser();
       return parser[method](path.rel("test/specs/internal/internal.yaml")).then((result: any) => {
         expect(result).to.be.an("object");
 
