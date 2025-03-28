@@ -16,10 +16,10 @@ export interface NormalizedArguments<S extends object = JSONSchema, O extends Pa
 export function normalizeArgs<S extends object = JSONSchema, O extends ParserOptions<S> = ParserOptions<S>>(
   _args: Partial<IArguments>,
 ): NormalizedArguments<S, O> {
-  let path;
-  let schema;
-  let options: Options<S> & O;
-  let callback;
+  var path;
+  var schema;
+  var options: Options<S> & O;
+  var callback;
   const args = Array.prototype.slice.call(_args) as any[];
 
   if (typeof args[args.length - 1] === "function") {
