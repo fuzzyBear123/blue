@@ -10,8 +10,8 @@ import { expect } from "vitest";
 
 describe("Schema with internal $refs", () => {
   it("should parse successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.parse(path.rel("test/specs/internal/internal.yaml"));
+    let parser = new $RefParser();
+    let schema = await parser.parse(path.rel("test/specs/internal/internal.yaml"));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(parsedSchema);
     expect(parser.$refs.paths()).to.deep.equal([path.abs("test/specs/internal/internal.yaml")]);
@@ -27,8 +27,8 @@ describe("Schema with internal $refs", () => {
   );
 
   it("should dereference successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.dereference(path.rel("test/specs/internal/internal.yaml"));
+    let parser = new $RefParser();
+    let schema = await parser.dereference(path.rel("test/specs/internal/internal.yaml"));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
     // Reference equality
@@ -49,8 +49,8 @@ describe("Schema with internal $refs", () => {
   });
 
   it("should bundle successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.bundle(path.rel("test/specs/internal/internal.yaml"));
+    let parser = new $RefParser();
+    let schema = await parser.bundle(path.rel("test/specs/internal/internal.yaml"));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(bundledSchema);
   });
