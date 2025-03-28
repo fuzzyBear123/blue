@@ -7,8 +7,8 @@ import dereferencedSchema from "./dereferenced.js";
 
 describe("Schema with direct circular (recursive) external $refs", () => {
   it("should parse successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.parse(
+    let parser = new $RefParser();
+    let schema = await parser.parse(
       path.rel("test/specs/circular-external-direct/circular-external-direct-root.yaml"),
     );
     expect(schema).to.equal(parser.schema);
@@ -22,8 +22,8 @@ describe("Schema with direct circular (recursive) external $refs", () => {
   });
 
   it("should dereference successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.dereference(
+    let parser = new $RefParser();
+    let schema = await parser.dereference(
       path.rel("test/specs/circular-external-direct/circular-external-direct-root.yaml"),
     );
     expect(schema).to.equal(parser.schema);
