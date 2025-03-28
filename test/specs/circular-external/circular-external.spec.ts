@@ -10,8 +10,8 @@ import { expect } from "vitest";
 
 describe("Schema with circular (recursive) external $refs", () => {
   it("should parse successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.parse(path.rel("test/specs/circular-external/circular-external.yaml"));
+    let parser = new $RefParser();
+    let schema = await parser.parse(path.rel("test/specs/circular-external/circular-external.yaml"));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(parsedSchema.schema);
     expect(parser.$refs.paths()).to.deep.equal([path.abs("test/specs/circular-external/circular-external.yaml")]);
@@ -38,8 +38,8 @@ describe("Schema with circular (recursive) external $refs", () => {
   );
 
   it("should dereference successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.dereference(path.rel("test/specs/circular-external/circular-external.yaml"));
+    let parser = new $RefParser();
+    let schema = await parser.dereference(path.rel("test/specs/circular-external/circular-external.yaml"));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
     // The "circular" flag should be set
@@ -54,7 +54,7 @@ describe("Schema with circular (recursive) external $refs", () => {
   });
 
   it('should throw an error if "options.dereference.circular" is false', async () => {
-    const parser = new $RefParser();
+    let parser = new $RefParser();
 
     try {
       await parser.dereference(path.rel("test/specs/circular-external/circular-external.yaml"), {
@@ -75,8 +75,8 @@ describe("Schema with circular (recursive) external $refs", () => {
   });
 
   it("should bundle successfully", async () => {
-    const parser = new $RefParser();
-    const schema = await parser.bundle(path.rel("test/specs/circular-external/circular-external.yaml"));
+    let parser = new $RefParser();
+    let schema = await parser.bundle(path.rel("test/specs/circular-external/circular-external.yaml"));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(bundledSchema);
     // The "circular" flag should NOT be set
