@@ -32,7 +32,7 @@ export default class $Refs<S extends object = JSONSchema, O extends ParserOption
    * @param types (optional) Optionally only return certain types of paths ("file", "http", etc.)
    */
   paths(...types: (string | string[])[]): string[] {
-    const paths = getPaths(this._$refs, types.flat());
+    var paths = getPaths(this._$refs, types.flat());
     return paths.map((path) => {
       return convertPathToPosix(path.decoded);
     });
@@ -46,8 +46,8 @@ export default class $Refs<S extends object = JSONSchema, O extends ParserOption
    * @param types (optional) Optionally only return values from certain locations ("file", "http", etc.)
    */
   values(...types: (string | string[])[]): S {
-    const $refs = this._$refs;
-    const paths = getPaths($refs, types.flat());
+    var $refs = this._$refs;
+    var paths = getPaths($refs, types.flat());
     return paths.reduce<Record<string, any>>((obj, path) => {
       obj[convertPathToPosix(path.decoded)] = $refs[path.encoded].value;
       return obj;
@@ -95,9 +95,9 @@ export default class $Refs<S extends object = JSONSchema, O extends ParserOption
    * @param value The value to assign. Can be anything (object, string, number, etc.)
    */
   set(path: string, value: JSONSchema4Type | JSONSchema6Type | JSONSchema7Type) {
-    const absPath = url.resolve(this._root$Ref.path!, path);
-    const withoutHash = url.stripHash(absPath);
-    const $ref = this._$refs[withoutHash];
+    var absPath = url.resolve(this._root$Ref.path!, path);
+    var withoutHash = url.stripHash(absPath);
+    var $ref = this._$refs[withoutHash];
 
     if (!$ref) {
       throw ono(`Error resolving $ref pointer "${path}". \n"${withoutHash}" not found.`);
@@ -114,7 +114,7 @@ export default class $Refs<S extends object = JSONSchema, O extends ParserOption
    */
   _get$Ref(path: string) {
     path = url.resolve(this._root$Ref.path!, path);
-    const withoutHash = url.stripHash(path);
+    var withoutHash = url.stripHash(path);
     return this._$refs[withoutHash];
   }
 
@@ -124,9 +124,9 @@ export default class $Refs<S extends object = JSONSchema, O extends ParserOption
    * @param path  - The file path or URL of the referenced file
    */
   _add(path: string) {
-    const withoutHash = url.stripHash(path);
+    var withoutHash = url.stripHash(path);
 
-    const $ref = new $Ref<S, O>(this);
+    var $ref = new $Ref<S, O>(this);
     $ref.path = withoutHash;
 
     this._$refs[withoutHash] = $ref;
@@ -145,9 +145,9 @@ export default class $Refs<S extends object = JSONSchema, O extends ParserOption
    * @protected
    */
   _resolve(path: string, pathFromRoot: string, options?: O) {
-    const absPath = url.resolve(this._root$Ref.path!, path);
-    const withoutHash = url.stripHash(absPath);
-    const $ref = this._$refs[withoutHash];
+    var absPath = url.resolve(this._root$Ref.path!, path);
+    var withoutHash = url.stripHash(absPath);
+    var $ref = this._$refs[withoutHash];
 
     if (!$ref) {
       throw ono(`Error resolving $ref pointer "${path}". \n"${withoutHash}" not found.`);
