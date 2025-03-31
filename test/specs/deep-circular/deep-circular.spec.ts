@@ -10,8 +10,8 @@ import { expect } from "vitest";
 
 describe("Schema with deeply-nested circular $refs", () => {
   it("should parse successfully", async () => {
-    let parser = new $RefParser();
-    let schema = await parser.parse(path.rel("test/specs/deep-circular/deep-circular.yaml"));
+    const parser = new $RefParser();
+    const schema = await parser.parse(path.rel("test/specs/deep-circular/deep-circular.yaml"));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(parsedSchema.schema);
     expect(parser.$refs.paths()).to.deep.equal([path.abs("test/specs/deep-circular/deep-circular.yaml")]);
@@ -34,8 +34,8 @@ describe("Schema with deeply-nested circular $refs", () => {
   );
 
   it("should dereference successfully", async () => {
-    let parser = new $RefParser();
-    let schema = await parser.dereference(path.rel("test/specs/deep-circular/deep-circular.yaml"));
+    const parser = new $RefParser();
+    const schema = await parser.dereference(path.rel("test/specs/deep-circular/deep-circular.yaml"));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
     // The "circular" flag should be set
@@ -56,7 +56,7 @@ describe("Schema with deeply-nested circular $refs", () => {
   });
 
   it('should throw an error if "options.dereference.circular" is false', async () => {
-    let parser = new $RefParser();
+    const parser = new $RefParser();
 
     try {
       await parser.dereference(path.rel("test/specs/deep-circular/deep-circular.yaml"), {
@@ -85,8 +85,8 @@ describe("Schema with deeply-nested circular $refs", () => {
   });
 
   it("should bundle successfully", async () => {
-    let parser = new $RefParser();
-    let schema = await parser.bundle(path.rel("test/specs/deep-circular/deep-circular.yaml"));
+    const parser = new $RefParser();
+    const schema = await parser.bundle(path.rel("test/specs/deep-circular/deep-circular.yaml"));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(bundledSchema);
     // The "circular" flag should NOT be set
