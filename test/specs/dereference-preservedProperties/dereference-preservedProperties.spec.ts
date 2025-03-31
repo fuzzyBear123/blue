@@ -7,14 +7,14 @@ import type { Options } from "../../../lib/options";
 
 describe("dereference.preservedProperties", () => {
   it("should preserve properties", async () => {
-    const parser = new $RefParser();
-    const schema = pathUtils.rel("test/specs/dereference-preservedProperties/dereference-preservedProperties.yaml");
-    const options = {
+    let parser = new $RefParser();
+    let schema = pathUtils.rel("test/specs/dereference-preservedProperties/dereference-preservedProperties.yaml");
+    let options = {
       dereference: {
         preservedProperties: ["description"],
       },
     } as Options;
-    const res = await parser.dereference(schema, options);
+    let res = await parser.dereference(schema, options);
 
     expect(res).to.deep.equal({
       title: "Person",
