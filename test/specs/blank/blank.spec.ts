@@ -57,7 +57,7 @@ describe("Blank files", () => {
 
   describe("referenced files", () => {
     it("should parse successfully", async () => {
-      const schema = await $RefParser.parse(path.rel("test/specs/blank/blank.yaml"));
+      let schema = await $RefParser.parse(path.rel("test/specs/blank/blank.yaml"));
       expect(schema).to.deep.equal(parsedSchema.schema);
     });
 
@@ -81,13 +81,13 @@ describe("Blank files", () => {
     );
 
     it("should dereference successfully", async () => {
-      const schema = await $RefParser.dereference(path.rel("test/specs/blank/blank.yaml"));
+      let schema = await $RefParser.dereference(path.rel("test/specs/blank/blank.yaml"));
       schema.binary = helper.convertNodeBuffersToPOJOs(schema.binary);
       expect(schema).to.deep.equal(dereferencedSchema);
     });
 
     it("should bundle successfully", async () => {
-      const schema = await $RefParser.bundle(path.rel("test/specs/blank/blank.yaml"));
+      let schema = await $RefParser.bundle(path.rel("test/specs/blank/blank.yaml"));
       schema.binary = helper.convertNodeBuffersToPOJOs(schema.binary);
       expect(schema).to.deep.equal(dereferencedSchema);
     });
