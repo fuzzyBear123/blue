@@ -18,12 +18,12 @@ describe("Schema with invalid pointers", () => {
   });
 
   it("should throw a grouped error for an invalid pointer if continueOnError is true", async () => {
-    const parser = new $RefParser();
+    let parser = new $RefParser();
     try {
       await parser.dereference(path.rel("test/specs/invalid-pointers/invalid.json"), { continueOnError: true });
       helper.shouldNotGetCalled();
     } catch (e) {
-      const err = e as JSONParserErrorGroup;
+      let err = e as JSONParserErrorGroup;
       expect(err).to.be.instanceof(JSONParserErrorGroup);
       expect(err.files).to.equal(parser);
       expect(err.message).to.equal(
