@@ -6,9 +6,9 @@ import dereferencedSchema from "./bundled";
 
 describe("Bundles", () => {
   it("should bundle correctly", async () => {
-    let parser = new $RefParser();
-    let schema = path.rel("test/specs/bundle/schemaA.json");
-    let bundled = await parser.bundle(schema);
+    const parser = new $RefParser();
+    const schema = path.rel("test/specs/bundle/schemaA.json");
+    const bundled = await parser.bundle(schema);
     expect(bundled).to.deep.equal(dereferencedSchema);
   });
 });
